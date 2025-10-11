@@ -38,7 +38,7 @@ public class Round
         // put your code here
         return secret;
     }
-    public int getnumGuesses(){
+    public int getNumGuesses(){
         return numGuesses;
     }
     public boolean getWin(){
