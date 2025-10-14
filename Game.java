@@ -9,6 +9,9 @@ public class Game
 {
     // instance variables - replace the example below with your own
     private Scanner scan;
+    private int numGuesses;
+    private int numRoundsWon;
+    private boolean quitGame;
 
     /**
      * Constructor for objects of class Game
@@ -17,6 +20,9 @@ public class Game
     {
         // initialise instance variables
         scan = new Scanner(System.in);
+        numGuesses = 0;
+        numRoundsWon = 0;
+        quitGame = false;
     }
 
     /**
@@ -35,9 +41,50 @@ public class Game
         return scan;
     }
     
+    public int getNumGuesses(){
+        return numGuesses;
+    }
+    
+    public int getNumRoundsWon(){
+        return numRoundsWon;
+    }
+    
+    public boolean getQuitGame(){
+        return quitGame;
+    }
+    
     public void play(){
-        Round round = new Round(scan);
-        round.play();
+        while (!quitGame){
+            Round round = new Round(scan);
+            round.play();
+            if(round.getWin()){
+                numGuesses += round.getNumGuesses();
+                numRoundsWon++;
+            }
+            playAgain();
         }
+        System.out.println("Thanks for playing");
+        System.out.println("Rounds Won: " + numRoundsWon);
+        System.out.println("Average Guesses: " + getAverage());
+        }
+        
+    private void playAgain(){
+        System.out.println("Do you want to play again? Type y or n");
+        String response = scan.next();
+        if (response.equals("n")){
+            quitGame = true;
+        }
+        
+    }
+    
+    private double getAverage(){
+        double avg = 0.0;
+        if (numRoundsWon > 0){
+            avg = (double) numGuesses / numRoundsWon;
+        }
+        return avg;
+    } 
+    
+    
     }
 
