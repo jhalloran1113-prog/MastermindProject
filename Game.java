@@ -35,6 +35,9 @@ public class Game
     {
         // put your code here
         scan = s;
+        numGuesses = 0;
+        numRoundsWon = 0;
+        quitGame = false;
     }
     
     public Scanner getScan(){
